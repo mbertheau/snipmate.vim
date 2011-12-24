@@ -84,3 +84,53 @@ snippet ifmain
 # __magic__
 snippet _
 	__${1:init}__${2}
+
+# Django snippets
+snippet cmd EbaySite
+	from optparse import make_option
+
+	from django.core.management import CommandError
+
+	from momox.ebay.management import EbaySiteCommand
+
+	class Command(EbaySiteCommand):
+	    option_list = EbaySiteCommand.option_list + (
+	        make_option('--${1:option}', help='${2:Help for $1}'),)
+
+	    help = "${3:Help for command}"
+
+	    def handle_site_command(self, site, *args, **options):
+	        ${4:pass}
+snippet cmd SingleInstanceCommand
+	from optparse import make_option
+
+	from django.core.management import CommandError
+
+	from momox.util.management import SingleInstanceCommand
+
+	class Command(SingleInstanceCommand):
+	    option_list = SingleInstanceCommand.option_list + (
+	        make_option('--${1:option}', help='${2:Help for $1}'),)
+
+	    help = "${3:Help for command}"
+
+	    def handle(self, *args, **options):
+	        ${4:pass}
+
+	        self.run_single_instance(self.run)
+
+	    def run(self):
+	        ${5:pass}
+snippet cmd Base
+	from optparse import make_option
+
+	from django.core.management import BaseCommand, CommandError
+
+	class Command(BaseCommand):
+	    option_list = BaseCommand.option_list + (
+	        make_option('--${1:option}', help='${2:Help for $1}'),)
+
+	    help = "${3:Help for command}"
+
+	    def handle(self, *args, **options):
+	        ${4:pass}
